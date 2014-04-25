@@ -11,6 +11,7 @@
 #include "String.h"
 #include "Int.h"
 #include "Real.h"
+#include <string.h>
 
 const char* const SYMBOL_STRINGS[] =
 {
@@ -66,7 +67,7 @@ void Print::printPageHeader()
     putchar(FORM_FEED_CHAR);
     printf("Page    %d  %s  %s\n\n", ++pageNumber, sourceFileName.c_str(), currentDate.c_str());
 }
-void Print::printToken(Literal *token)
+void Print::printToken(Token *token)
 {
     char line[MAX_SOURCE_LINE_LENGTH + 32];
     Literal* lit = token;
