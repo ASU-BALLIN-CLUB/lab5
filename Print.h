@@ -7,7 +7,6 @@
 
 #ifndef __Lab4__Print__
 #define __Lab4__Print__
-
 #include <iostream>
 #include "common.h"
 #include "Token.h"
