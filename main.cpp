@@ -12,6 +12,7 @@
 #include "Token.h"
 #include "IdentifierBinaryTree.h"
 
+
 FILE *init_lister(const char *name, char source_file_name[], char dte[]);
 void quit_scanner(FILE *src_file, Token *list);
 void add_token_to_list(Token *list, Token *new_token);
@@ -58,3 +59,4 @@ FILE *init_lister(const char *name, char source_file_name[], char dte[])
     return file;
 }
 
+ 
