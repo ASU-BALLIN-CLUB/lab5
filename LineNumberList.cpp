@@ -30,6 +30,6 @@ void LineNumberList::setNextLineNumber(LineNumberList *next)
     this->nextLineNumber = next;
 }
 LineNumberList *LineNumberList::getNextLineNumber()
-{
+{ 
     return this->nextLineNumber;
 }
