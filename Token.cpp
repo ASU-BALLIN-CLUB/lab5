@@ -60,6 +60,9 @@ Token *Token::getRightChild()
 {
     return this->rightChild;
 }
+void Token::print()
+{
+}
 void Token::addToLineNumberList(LineNumberList *listItem)
 {
     LineNumberList *tmp = getLineNumberList();
