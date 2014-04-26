@@ -7,7 +7,11 @@
 
 #include "Scanner.h"
 #include "Print.h"
-#include "Token.h"
+#include "String.h"
+#include "Identifier.h"
+#include "Int.h"
+#include "Real.h"
+
 
 typedef struct
 {
@@ -59,7 +63,6 @@ Scanner::Scanner(FILE *source_file, char source_name[], char date[], Print print
     
     line_number = 0;
     source_line[0] = '\0';
-    tok = NULL;
 }
 Scanner::~Scanner()
 {
@@ -86,9 +89,8 @@ Token* Scanner::getToken()
     char ch = '\0'; //This can be the current character you are examining during scanning.
     char token_string[MAX_TOKEN_STRING_LENGTH] = {'\0'}; //Store your token here as you build it.
     char *token_ptr = token_string; //write some code to point this to the beginning of token_string
-    Token *new_token = null;
     
-    new_token->setType(NO_TYPE);
+    //new_token->setType(NO_TYPE);
     //1.  Skip past all of the blanks
     if (line_ptr == NULL)
     {
@@ -99,26 +101,29 @@ Token* Scanner::getToken()
     
     //2.  figure out which case you are dealing with LETTER, DIGIT, QUOTE, EOF, or special, by examining ch
     switch (char_table[ch])
-    {//3.  Call the appropriate function to deal with the cases in 2.
+    {//3.  Call the approxpriate function to deal with the cases in 2.
         case LETTER:
-            getWord(token_string, token_ptr, new_token);
+            
+            getWord(token_string, token_ptr);
             break;
         case DIGIT:
-            getNumber(token_string, token_ptr, new_token);
+            getNumber(token_string, token_ptr);
             break;
         case QUOTE:
-            new_token = new String();
-            getString(token_string, token_ptr, new_token);
+            getString(token_string, token_ptr);
+            
             break;
         case EOF_CODE:
-            new_token->setCode(END_OF_FILE);
+            // new_token = new Token();
+            newToken->setCode(END_OF_FILE);
             break;
         default:
-            getSpecial(token_string, token_ptr, new_token);
+            newToken = new Token();
+            getSpecial(token_string, token_ptr, newToken);
             break;
     }
     
-    return new_token; //What should be returned here?
+    return newToken; //What should be returned here?
 }
 char Scanner::getChar(char source_buffer[])
 {
@@ -198,12 +203,16 @@ void Scanner::getWord(char *str, char *token_ptr)
      Write some code to Check if the word is a reserved word.
      if it is not a reserved word its an identifier.
      */
-    if (!isReservedWord(str, tok))
+    if (!isReservedWord(str, newToken))
     {
         //set token to identifier
-        tok->setCode(IDENTIFIER);
+        //newToken->setCode(IDENTIFIER);
+        newToken = new Identifier();
     }
-    tok->setTokenString(string(str));
+    else
+    {
+        newToken->setTokenString(string(str));
+    }
 }
 void Scanner::getNumber(char *str, char *token_ptr)
 {
@@ -211,7 +220,7 @@ void Scanner::getNumber(char *str, char *token_ptr)
      Write some code to Extract the number and convert it to a literal number.
      */
     char ch = *line_ptr;
-    bool int_type = true;
+    numberType = true;
     
     do
     {
@@ -227,12 +236,12 @@ void Scanner::getNumber(char *str, char *token_ptr)
         if (ch == '.')
         {
             //We have a dotdot, back up ptr and our number is an int.
-            int_type = true;
+            numberType = true;
             --line_ptr;
         }
         else
         {
-            int_type = false;
+            numberType = false;
             *(token_ptr++) = '.';
             //We have a floating point number
             do
@@ -245,7 +254,7 @@ void Scanner::getNumber(char *str, char *token_ptr)
     }
     if (ch == 'e' || ch == 'E')
     {
-        int_type = false;
+        numberType = false;
         *(token_ptr++) = ch;
         ch = *(++line_ptr);
         if (ch == '+' || ch == '-')
@@ -261,17 +270,20 @@ void Scanner::getNumber(char *str, char *token_ptr)
         while (char_table[ch] == DIGIT);
     }
     *token_ptr = '\0';
-    tok->setCode(NUMBER);
-    if (int_type)
+    newToken->setCode(NUMBER);
+    if (numberType)
     {
+        //tok->setType(INTEGER_LIT);
         Int *newInt = new Int();
         newInt->setLiteral((int)atoi(str));
-        tok = newInt;
+        newToken = newInt;
     }
     else
     {
-        tok->setType(REAL_LIT);
-        tok->setLiteral((float)atof(str));
+        //newToken->setCode(Real);
+        Real *newReal = new Real();
+        newReal->setLiteral((float)atof(str));
+        newToken = newReal;
     }
 }
 void Scanner::getString(char *str, char *token_ptr)
@@ -288,12 +300,14 @@ void Scanner::getString(char *str, char *token_ptr)
     }
     *token_ptr++ = *line_ptr++;
     *token_ptr = '\0';
-    tok->setCode(STRING);
-    tok->setType(STRING_LIT);
+    newToken->setCode(STRING);
+    //  newToken->setType(STRING_LIT);
     string test(str);
-    tok->setLiteral(test);
+    String *newString = new String();
+    newString->setLiteral(test);
+    newToken = newString;
 }
-void Scanner::getSpecial(char *str, char *token_ptr)
+void Scanner::getSpecial(char *str, char *token_ptr, Token *tok)
 {
     /*
      Write some code to Extract the special token.  Most are single-character
