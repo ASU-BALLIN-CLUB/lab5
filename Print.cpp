@@ -7,11 +7,12 @@
 
 #include "Print.h"
 #include "Token.h"
-#include "Literal.h"
-#include "String.h"
 #include "Int.h"
 #include "Real.h"
-#include <string.h>
+#include "String.h"
+#include "Literal.h"
+#include "common.h"
+
 
 const char* const SYMBOL_STRINGS[] =
 {
@@ -70,29 +71,43 @@ void Print::printPageHeader()
 void Print::printToken(Token *token)
 {
     char line[MAX_SOURCE_LINE_LENGTH + 32];
-    Literal* lit = token;
-    Int *integer = Literal<int>(lit);
-    Real *real = Literal<float>(lit);
-    String *str = Literal<string>(lit);
-    if (integer)
+    const char *symbol_string = SYMBOL_STRINGS[token->getCode()];
+    //token = new Integer();
+    //Real *newReal = new Real();
+    //String *newString = new String();
+    
+    
+    switch (token->getCode())
     {
-        integer->print();
+        case NUMBER:
+            if (numberType)
+            {
+                //                sprintf(line, "    >> %-16s %d (integer)\n", symbol_string, token->getIntLiteral());
+                token = new Int();
+                token->print();
+                
+            }
+            else
+            {
+                //                sprintf(line, "    >> %-16s %g (real)\n", symbol_string, token->getRealLiteral());
+                token = new Real();
+                token->print();
+            }
+            //            intToken->print(line, symbol_string);
+            
+            
+            break;
+        case STRING:
+            //            sprintf(line, "    >> %-16s %-s\n", symbol_string, token->getStringLiteral().c_str());
+            token = new String();
+            token->print();
+            
+            break;
+        default:
+            sprintf(line, "    >> %-16s %-s\n", symbol_string, token->getTokenString().c_str());
+            break;
     }
-    else if (real)
-    {
-        real->print();
-    }
-    else if (str)
-    {
-        str->print();
-    }
-    else
-    {
-        
-        const char *symbol_string = SYMBOL_STRINGS[token->getCode()];
-        sprintf(line, "    >> %-16s %-s\n", symbol_string, token->getTokenString().c_str());
-        printLine(line);
-    }
+    printLine(line);
 }
 int Print::getLineCount()
 {
