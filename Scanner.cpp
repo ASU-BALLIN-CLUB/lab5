@@ -11,7 +11,8 @@
 #include "Identifier.h"
 #include "Int.h"
 #include "Real.h"
-
+#include <string.h>
+#include <stdlib.h>
 
 typedef struct
 {
@@ -114,7 +115,7 @@ Token* Scanner::getToken()
             
             break;
         case EOF_CODE:
-            // new_token = new Token();
+            newToken = new Token();
             newToken->setCode(END_OF_FILE);
             break;
         default:
@@ -220,7 +221,7 @@ void Scanner::getNumber(char *str, char *token_ptr)
      Write some code to Extract the number and convert it to a literal number.
      */
     char ch = *line_ptr;
-    numberType = true;
+    bool numberType = true;
     
     do
     {
