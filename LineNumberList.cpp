@@ -33,3 +33,4 @@ LineNumberList *LineNumberList::getNextLineNumber()
 { 
     return this->nextLineNumber;
 }
+
