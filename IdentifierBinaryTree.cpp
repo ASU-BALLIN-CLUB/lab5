@@ -113,3 +113,4 @@ bool IdentifierBinaryTree::addIdentifier(Identifier *tok, int lineNum)
     }
     return success;
 }
+ 
