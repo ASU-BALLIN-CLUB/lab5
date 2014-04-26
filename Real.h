@@ -12,6 +12,8 @@
 #include <iostream>
 #include "Literal.h"
 
+using namespace std;
+
 class Real : public Literal<float>
 {
 public:
