@@ -26,3 +26,4 @@ Token.o: Token.cpp Token.h
 
 clean:
 	rm CrossReference Identifier.o IdentifierBinaryTree.o Int.o LineNumberList.o Literal.o main.o Print.o Real.o Scanner.o String.o Token.o
+Literal.h.gch
