@@ -16,5 +16,5 @@ Real::~Real(){
     
 }
 void Real::print(){
-    
+    cout << "    >> <NUMBER>" << this->getLiteral() << " (real)\n";
 }
