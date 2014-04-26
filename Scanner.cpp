@@ -90,7 +90,7 @@ Token* Scanner::getToken()
     char ch = '\0'; //This can be the current character you are examining during scanning.
     char token_string[MAX_TOKEN_STRING_LENGTH] = {'\0'}; //Store your token here as you build it.
     char *token_ptr = token_string; //write some code to point this to the beginning of token_string
-    
+    puts("a");
     //new_token->setType(NO_TYPE);
     //1.  Skip past all of the blanks
     if (line_ptr == NULL)
@@ -99,31 +99,35 @@ Token* Scanner::getToken()
     }
     skipBlanks(source_line);
     ch = *line_ptr;
-    
+    puts("b");
     //2.  figure out which case you are dealing with LETTER, DIGIT, QUOTE, EOF, or special, by examining ch
     switch (char_table[ch])
     {//3.  Call the approxpriate function to deal with the cases in 2.
         case LETTER:
-            
+            puts("LETTER");
             getWord(token_string, token_ptr);
             break;
         case DIGIT:
+	    puts("DIGIT");
             getNumber(token_string, token_ptr);
             break;
         case QUOTE:
+	    puts("Quote");
             getString(token_string, token_ptr);
             
             break;
         case EOF_CODE:
+	    puts("EOF");
             newToken = new Token();
             newToken->setCode(END_OF_FILE);
             break;
         default:
+	    puts("default");
             newToken = new Token();
             getSpecial(token_string, token_ptr, newToken);
             break;
     }
-    
+    puts("c");
     return newToken; //What should be returned here?
 }
 char Scanner::getChar(char source_buffer[])
@@ -190,30 +194,35 @@ void Scanner::getWord(char *str, char *token_ptr)
      Write some code to Extract the word
      */
     char ch = *line_ptr;
+    puts("one");
     while ((char_table[ch] == LETTER) || (char_table[ch] == DIGIT))
     {
+	puts("two");
         *token_ptr++ = *line_ptr++;
         ch = *line_ptr;
     }
     *token_ptr = '\0';
-    
+    puts("three");
     //Downshift the word, to make it lower case
     downshiftWord(str);
-    
+    puts("four");
     /*
      Write some code to Check if the word is a reserved word.
      if it is not a reserved word its an identifier.
      */
-    if (!isReservedWord(str, newToken))
+    if (!isReservedWord(str))
     {
+        puts("five");
         //set token to identifier
         //newToken->setCode(IDENTIFIER);
         newToken = new Identifier();
     }
-    else
-    {
+    
+   
+	puts("five.5");
         newToken->setTokenString(string(str));
-    }
+ 
+    puts("six");
 }
 void Scanner::getNumber(char *str, char *token_ptr)
 {
@@ -467,7 +476,7 @@ void Scanner::downshiftWord(char word[])
         word[index] = tolower(word[index]);
     }
 }
-bool Scanner::isReservedWord(char *str, Token *tok)
+bool Scanner::isReservedWord(char *str)
 {
     /*
      Examine the reserved word table and determine if the function input is a reserved word.
@@ -483,7 +492,7 @@ bool Scanner::isReservedWord(char *str, Token *tok)
             rw = rw_table[str_len - 2][i];
             if (strcmp(str, rw.string) == 0)
             {
-                tok->setCode(rw.token_code);
+                newToken->setCode(rw.token_code);
                 return true;
             }
         }
