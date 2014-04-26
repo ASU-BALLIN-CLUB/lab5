@@ -12,6 +12,8 @@
 #include <iostream>
 #include "Literal.h"
 
+using namespace std;
+
 class Int : public Literal<int>
 {
 public:
