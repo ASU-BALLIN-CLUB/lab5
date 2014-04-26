@@ -20,6 +20,7 @@
 #define MAX_PRINT_LINE_LENGTH   80
 #define MAX_LINES_PER_PAGE      50
 #define DATE_STRING_LENGTH      26
+extern bool numberType;
 
 /***************************
  Token Codes
