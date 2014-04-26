@@ -13,6 +13,8 @@
 #include <string>
 #include "Literal.h"
 
+using namespace std;
+
 class String : public Literal<string>
 {
 public:
