@@ -7,14 +7,21 @@
 
 #ifndef __Lab4__Print__
 #define __Lab4__Print__
+
 #include <iostream>
 #include "common.h"
 #include "Token.h"
+#include "Identifier.h"
+#include "Int.h"
+#include "Real.h"
+#include "String.h"
 
 using namespace std;
 
-class Print
-{
+class LineNumberList;
+
+
+class Print {
 private:
     string sourceFileName;
     string currentDate;
@@ -30,8 +37,8 @@ public:
     void printLine(char line[]);
     void printToken(Token *token);
     int getLineCount();
-    void printTree(Token *identifier);
-    void printTreeRecursive(Token *identifier);
+    void printTree(Identifier *identifier);
+    void printTreeRecursive(Identifier *identifier);
 };
 
 #endif /* defined(__Lab4__Print__) */
