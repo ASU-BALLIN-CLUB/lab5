@@ -4,6 +4,7 @@
 //
 //  Created by Bryce Holton.
 //
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #ifndef Lab4_Scanner_h
 #define Lab4_Scanner_h
@@ -20,6 +21,7 @@ typedef enum
 }
 CharCode;
 
+// header file for the scanner class.
 class Scanner
 {
 private:
