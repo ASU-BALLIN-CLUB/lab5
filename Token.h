@@ -4,6 +4,7 @@
 //
 //  Created by Bryce Holton.
 //
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #ifndef __Lab4__Token__
 #define __Lab4__Token__
@@ -18,6 +19,8 @@ using namespace std;
  this is a valid Pascal token.  A token must have a literal type,
  a literal value, and a token code.
  ***************/
+ 
+// Header file for the token file.
 class Token
 {
 private:
@@ -31,7 +34,6 @@ private:
     }
     literal;
     string tokenString;
-    //What variables and methods am I missing to implement a binary tree.
     Token *leftChild;
     Token *rightChild;
     LineNumberList *list;
