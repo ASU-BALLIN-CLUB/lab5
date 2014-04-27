@@ -4,7 +4,7 @@
 //
 //  Created by James on 4/22/14.
 //
-//
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #ifndef ____Int__
 #define ____Int__
@@ -14,6 +14,7 @@
 
 using namespace std;
 
+// Header file for int function
 class Int : public Literal<int>
 {
 public:
