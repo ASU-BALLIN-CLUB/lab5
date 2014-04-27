@@ -5,6 +5,7 @@
 //  Created by Bryce Holton on 3/28/14.
 //  Copyright (c) 2014 Bryce Holton. All rights reserved.
 //
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #ifndef __Lab4__IdentifierBinaryTree__
 #define __Lab4__IdentifierBinaryTree__
@@ -15,6 +16,7 @@
 
 using namespace std;
 
+// Header file for the Identifier Binary Tree
 class IdentifierBinaryTree
 {
 private:
