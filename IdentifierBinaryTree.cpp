@@ -5,13 +5,16 @@
 //  Created by Bryce Holton on 3/28/14.
 //  Copyright (c) 2014 Bryce Holton. All rights reserved.
 //
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #include "IdentifierBinaryTree.h"
 
+// Identifier Binary Tree constructor
 IdentifierBinaryTree::IdentifierBinaryTree()
 {
     setTreeRoot(NULL);
 }
+// IBT Deconstructor
 IdentifierBinaryTree::~IdentifierBinaryTree()
 {
     Identifier *root = getTreeRoot();
@@ -21,6 +24,7 @@ IdentifierBinaryTree::~IdentifierBinaryTree()
         depthFirstDeleteTree(root);
     }
 }
+// Function that deletes the children of a certain token if they exist.
 void IdentifierBinaryTree::depthFirstDeleteTree(Identifier *tok)
 {
     if (tok->getLeftChild() != NULL)
@@ -34,14 +38,17 @@ void IdentifierBinaryTree::depthFirstDeleteTree(Identifier *tok)
     }
     delete tok;
 }
+// Mutator method to set the tree root.
 void IdentifierBinaryTree::setTreeRoot(Identifier *root)
 {
     this->treeRoot = root;
 }
+// Accessor method to get the tree root.
 Identifier *IdentifierBinaryTree::getTreeRoot()
 {
     return this->treeRoot;
 }
+// Function to add an identifier to the binary tree.
 bool IdentifierBinaryTree::addIdentifier(Identifier *tok, int lineNum)
 {
     bool success = false;
