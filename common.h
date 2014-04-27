@@ -10,7 +10,9 @@
 
 #include <stdio.h>
 #include <sys/types.h>
+#include <string.h>
 #include <time.h>
+#include <stdlib.h>
 
 #define FORM_FEED_CHAR          '\f'
 #define EOF_CHAR                '\x7f'
@@ -20,7 +22,10 @@
 #define MAX_PRINT_LINE_LENGTH   80
 #define MAX_LINES_PER_PAGE      50
 #define DATE_STRING_LENGTH      26
-extern bool numberType;
+
+
+static bool number_type = false;
+
 
 /***************************
  Token Codes
@@ -46,5 +51,6 @@ typedef enum
     INTEGER_LIT, REAL_LIT, STRING_LIT, NO_TYPE,
 }
 LiteralType;
+
 
 #endif
