@@ -4,6 +4,7 @@
 //
 //  Created by Bryce Holton.
 //
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #include <iostream>
 #include <typeinfo>
@@ -17,6 +18,7 @@ FILE *init_lister(const char *name, char source_file_name[], char dte[]);
 void quit_scanner(FILE *src_file, Token *list);
 void add_token_to_list(Token *list, Token *new_token);
 
+// Main function
 int main(int argc, const char * argv[])
 {
     Token *token = NULL;
@@ -52,6 +54,7 @@ int main(int argc, const char * argv[])
     fclose(source_file);
     return 0;
 }
+// init_lister file, uses char *name, source_file_name[] and the date[].
 FILE *init_lister(const char *name, char source_file_name[], char dte[])
 {
     time_t timer;
