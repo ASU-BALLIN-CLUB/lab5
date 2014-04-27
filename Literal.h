@@ -4,7 +4,7 @@
 //
 //  Created by James on 4/22/14.
 //
-//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang 
 
 #ifndef ____Literal__
 #define ____Literal__
