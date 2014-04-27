@@ -4,6 +4,7 @@
 //
 //  Created by Bryce Holton.
 //
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #ifndef CSE220_project2_common_h
 #define CSE220_project2_common_h
@@ -26,7 +27,7 @@
 
 static bool number_type = false;
 
-
+// Common.h header file.
 /***************************
  Token Codes
  ***************************/
