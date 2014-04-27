@@ -5,6 +5,7 @@
 //  Created by Bryce Holton on 3/28/14.
 //  Copyright (c) 2014 Bryce Holton. All rights reserved.
 //
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #include "LineNumberList.h"
 
