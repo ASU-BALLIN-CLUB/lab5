@@ -4,9 +4,10 @@
 //
 //  Created by Bryce Holton.
 //
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #include "Scanner.h"
-
+// A struct defining token code and *string.
 typedef struct
 {
     const char *string;
@@ -14,6 +15,7 @@ typedef struct
 }
 RwStruct;
 
+// Different reserved words in a double array.
 const RwStruct rw_table[9][10] = {
     {{"do",DO},{"if",IF},{"in",IN},{"of",OF},{"or",OR},{"to",TO},{NULL,NO_TOKEN}}, //Reserved words of size 2
     {{"and",AND},{"div",DIV},{"end",END},{"for",FOR},{"mod",MOD},{"nil",NIL},{"not",NOT},{"set",SET},{"var",VAR},{NULL,NO_TOKEN}}, //Reserved words of size 3
@@ -25,6 +27,7 @@ const RwStruct rw_table[9][10] = {
     {{"procedure", PROCEDURE},{NULL,NO_TOKEN}}  // Reserved words of size 9
 };
 
+// Scanner constructor using source file, source name, the date, and a printer.
 Scanner::Scanner(FILE *source_file, char source_name[], char date[], Print printer) : print(printer)
 {
     src_file = source_file;
@@ -59,10 +62,12 @@ Scanner::Scanner(FILE *source_file, char source_name[], char date[], Print print
     source_line[0] = '\0';
 	new_token = new Token();
 }
+// Scanner Deconstructor.
 Scanner::~Scanner()
 {
 	
 }
+// Function to get the source line, returns true/false based on source length.
 bool Scanner::getSourceLine(char source_buffer[])
 {
     char print_buffer[MAX_SOURCE_LINE_LENGTH + 9];
@@ -79,6 +84,7 @@ bool Scanner::getSourceLine(char source_buffer[])
         return false;
     }
 }
+// Accessor method to get the current token.
 Token* Scanner::getToken()
 {
     char ch = '\0'; //This can be the current character you are examining during scanning.
@@ -115,6 +121,7 @@ Token* Scanner::getToken()
     
     return new_token; //What should be returned here?
 }
+// Accessor method to get the current character.
 char Scanner::getChar(char source_buffer[])
 {
     /*
@@ -148,6 +155,7 @@ char Scanner::getChar(char source_buffer[])
     }
     return ch;
 }
+// Function to skip past blanks in the source buffer.
 void Scanner::skipBlanks(char source_buffer[])
 {
     /*
@@ -159,6 +167,7 @@ void Scanner::skipBlanks(char source_buffer[])
         line_ptr++;
     }
 }
+// Skips the comments in the source buffer.
 void Scanner::skipComment(char source_buffer[])
 {
     /*
@@ -173,6 +182,7 @@ void Scanner::skipComment(char source_buffer[])
     }
     while ((ch != '}') && (ch != EOF_CHAR));
 }
+// Extracts the current word from the source buffer.
 void Scanner::getWord(char *str, char *token_ptr)
 {
     /*
@@ -204,6 +214,7 @@ void Scanner::getWord(char *str, char *token_ptr)
     }
     new_token->setTokenString(string(str));
 }
+// Extracts the number and converts it to a number literal.
 void Scanner::getNumber(char *str, char *token_ptr)
 {
     /*
@@ -274,6 +285,7 @@ void Scanner::getNumber(char *str, char *token_ptr)
         new_token = real;
     }
 }
+// Extracts a string from the source.
 void Scanner::getString(char *str, char *token_ptr)
 {
     /*
@@ -294,6 +306,7 @@ void Scanner::getString(char *str, char *token_ptr)
     str_obj->setLiteral(test);
     new_token = str_obj;
 }
+// Extracts a special token from the source, depending on single or double-length.
 void Scanner::getSpecial(char *str, char *token_ptr)
 {
     /*
@@ -441,6 +454,7 @@ void Scanner::getSpecial(char *str, char *token_ptr)
     *token_ptr = '\0';
     new_token->setTokenString(string(str));
 }
+// Function to downshift all the characters in the word input.
 void Scanner::downshiftWord(char word[])
 {
     /*
@@ -453,6 +467,7 @@ void Scanner::downshiftWord(char word[])
         word[index] = tolower(word[index]);
     }
 }
+// Checks if the function input is a reserved word based of the RW table.
 bool Scanner::isReservedWord(char *str)
 {
     /*
@@ -476,6 +491,7 @@ bool Scanner::isReservedWord(char *str)
     }
     return false;
 }
+// Returns the line number.
 int Scanner::getLineNumber()
 {
     return this->line_number;
