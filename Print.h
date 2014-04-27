@@ -4,6 +4,7 @@
 //
 //  Created by Bryce Holton.
 //
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #ifndef __Lab4__Print__
 #define __Lab4__Print__
@@ -20,7 +21,7 @@ using namespace std;
 
 class LineNumberList;
 
-
+// Header File for the Print file.
 class Print {
 private:
     string sourceFileName;
