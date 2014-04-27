@@ -6,12 +6,12 @@
 //
 
 #include <iostream>
+#include <typeinfo>
 #include "common.h"
 #include "Print.h"
 #include "Scanner.h"
 #include "Token.h"
 #include "IdentifierBinaryTree.h"
-#include <string.h>
 
 FILE *init_lister(const char *name, char source_file_name[], char dte[]);
 void quit_scanner(FILE *src_file, Token *list);
@@ -19,35 +19,36 @@ void add_token_to_list(Token *list, Token *new_token);
 
 int main(int argc, const char * argv[])
 {
-    puts("Hi");
-    Identifier *token = NULL;
+    Token *token = NULL;
     char source_name[MAX_FILE_NAME_LENGTH];
     char date[DATE_STRING_LENGTH];
     FILE *source_file = init_lister(argv[1], source_name, date);
     Print print(source_name, date);
+    //puts("1");
     Scanner scanner(source_file, source_name, date, print);
-    puts("1");
     IdentifierBinaryTree tree;
-    puts("2");
+    //puts("2");
     do
-    {
-	puts("3");
-        token = (Identifier*)scanner.getToken();
+	{
+        number_type = false;
+        //puts("3");
+        token = scanner.getToken();
+        //puts("3.5");
         print.printToken(token);
-	puts("4");
+        //puts("4");
         if (token->getCode() == IDENTIFIER)
-        {
-            tree.addIdentifier(token, scanner.getLineNumber());
-        }
+	    {
+            tree.addIdentifier((Identifier*) token, scanner.getLineNumber());
+	    }
         else if (token->getCode() != PERIOD && token->getCode() != END_OF_FILE)
-        {
-            delete token;
-        }
-    }
+	    {
+            
+	    }
+	}
+    //puts("5");
     while (token->getCode() != PERIOD && token->getCode() != END_OF_FILE);
-    puts("5");
+    
     print.printTree(tree.getTreeRoot());
-    delete token;
     fclose(source_file);
     return 0;
 }
@@ -62,4 +63,3 @@ FILE *init_lister(const char *name, char source_file_name[], char dte[])
     strcpy(dte, asctime(localtime(&timer)));
     return file;
 }
-
