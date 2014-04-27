@@ -5,19 +5,13 @@
 //  Created by Bryce Holton on 3/28/14.
 //  Copyright (c) 2014 Bryce Holton. All rights reserved.
 //
-//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #include "IdentifierBinaryTree.h"
-#include "LineNumberList.h"
 
-
-using namespace std;
-// IdentifierBinaryTree Constructor
 IdentifierBinaryTree::IdentifierBinaryTree()
 {
     setTreeRoot(NULL);
 }
-// IdentifierBinaryTree Deconstructor
 IdentifierBinaryTree::~IdentifierBinaryTree()
 {
     Identifier *root = getTreeRoot();
@@ -27,31 +21,27 @@ IdentifierBinaryTree::~IdentifierBinaryTree()
         depthFirstDeleteTree(root);
     }
 }
-// Deletes the children of the tree at any location if there is anything contained in them.
 void IdentifierBinaryTree::depthFirstDeleteTree(Identifier *tok)
 {
     if (tok->getLeftChild() != NULL)
     {
         depthFirstDeleteTree(tok->getLeftChild());
     }
-//    cout << tok->getTokenString() << "\n";
+    //    cout << tok->getTokenString() << "\n";
     if (tok->getRightChild() != NULL)
     {
         depthFirstDeleteTree(tok->getRightChild());
     }
     delete tok;
 }
-// Sets the root of the tree to specified input.
 void IdentifierBinaryTree::setTreeRoot(Identifier *root)
 {
     this->treeRoot = root;
 }
-// Gets the root of the tree.
 Identifier *IdentifierBinaryTree::getTreeRoot()
 {
     return this->treeRoot;
 }
-// A function to ad an identifier to the binary tree.
 bool IdentifierBinaryTree::addIdentifier(Identifier *tok, int lineNum)
 {
     bool success = false;
@@ -67,7 +57,7 @@ bool IdentifierBinaryTree::addIdentifier(Identifier *tok, int lineNum)
     else
     {
         string tokenName = tok->getTokenString();
-        Token *parentNode = getTreeRoot();
+        Identifier *parentNode = getTreeRoot();
         string treeNodeName;
         int stringComparison;
         
@@ -119,4 +109,3 @@ bool IdentifierBinaryTree::addIdentifier(Identifier *tok, int lineNum)
     }
     return success;
 }
-
