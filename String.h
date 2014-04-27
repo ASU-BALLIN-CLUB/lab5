@@ -4,7 +4,7 @@
 //
 //  Created by James on 4/22/14.
 //
-//
+//  Lab Partners: Sean Slamka, Aydin Balci, James (Shangxin) Wang
 
 #ifndef ____String__
 #define ____String__
@@ -15,6 +15,7 @@
 
 using namespace std;
 
+// Header file for string literal.
 class String : public Literal<string>
 {
 public:
